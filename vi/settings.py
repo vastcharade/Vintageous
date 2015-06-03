@@ -44,7 +44,7 @@ def set_generic_view_setting(view, name, value, opt, globally=False):
         if not globally or (opt.scope not in (SCOPE_VI_VIEW, SCOPE_VI_WINDOW)):
             view.settings().set(name, opt.parser(value))
         else:
-            name = 'vintageous_' + name
+            #name = 'vintageous_' + name
             prefs = sublime.load_settings('Preferences.sublime-settings')
             prefs.set(name, opt.parser(value))
             sublime.save_settings('Preferences.sublime-settings')
@@ -92,6 +92,11 @@ VI_OPTIONS = {
     'rulers':      vi_user_setting(scope=SCOPE_VIEW,      values=None,                    default=[],    parser=opt_rulers_parser, action=set_generic_view_setting, negatable=False),
     'showminimap': vi_user_setting(scope=SCOPE_WINDOW,    values=(True, False, '0', '1'), default=True,  parser=None,              action=set_minimap,              negatable=True),
     'showsidebar': vi_user_setting(scope=SCOPE_WINDOW,    values=(True, False, '0', '1'), default=True,  parser=None,              action=set_sidebar,              negatable=True),
+}
+
+VI_OPTION_SHORTCUTS = {
+    'ic': 'ignorecase',
+    'noic': 'noignorecase'
 }
 
 

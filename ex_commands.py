@@ -36,6 +36,7 @@ from Vintageous.vi.constants import MODE_VISUAL_LINE
 from Vintageous.vi.core import ViWindowCommandBase
 from Vintageous.vi.mappings import Mappings
 from Vintageous.vi.search import find_all_in_range
+from Vintageous.vi.settings import VI_OPTION_SHORTCUTS
 from Vintageous.vi.settings import set_global
 from Vintageous.vi.settings import set_local
 from Vintageous.vi.sublime import has_dirty_buffers
@@ -1702,6 +1703,8 @@ class ExSetLocal(ViWindowCommandBase):
         if option.endswith('?'):
             show_not_implemented()
             return
+
+        option = VI_OPTION_SHORTCUTS.get(option, option)
         try:
             set_local(self._view, option, value)
         except KeyError:
@@ -1724,6 +1727,8 @@ class ExSet(ViWindowCommandBase):
         if option.endswith('?'):
             show_not_implemented()
             return
+
+        option = VI_OPTION_SHORTCUTS.get(option, option)
         try:
             set_global(self._view, option, value)
         except KeyError:
